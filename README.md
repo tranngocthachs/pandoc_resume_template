@@ -45,6 +45,12 @@ Plain text
 The plain text and Markdown templates can be used to generate something to paste into
 email and web forms.
 
+macOS dependencies
+------------------
+
+    brew cask install mactex
+    brew install pandoc
+
 Usage
 -----
     cp example.yml resume.yml
