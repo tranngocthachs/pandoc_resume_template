@@ -1,6 +1,7 @@
 ---
 firstname: Ernest Q.
 lastname: Gnuherd
+title: Goatherd
 address:
   street: 1 Tough Place
   city: Rockville
@@ -52,14 +53,30 @@ experience:
         performance I was rapidly promoted to swing shift in 2010.
     tech: shovel, bucket
 
+education:
+  - dates: 09/1992 - 07/1996
+    degree: Some degree
+    institution: Some institution
+    city: Some place
+    description:
+        - Some description
+
 certifications:
   - cert: CSDHA
     description:
       Certified Sheep Dog Handler - Associate, 2014, number 38957271
 
+skills:
+    - name: Skill 1
+      description: Description 1
+    - name: Skill 2
+      description: Description 2
+
 interests:
   I am interested in widening my expertise to the problems of herding
   sheep.
+
+references: some references
 
 ...
 

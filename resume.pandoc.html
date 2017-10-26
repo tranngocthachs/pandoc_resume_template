@@ -8,7 +8,7 @@
 
         <meta name="viewport" content="width=device-width"/>
         <meta name="description" content="The Resume of $firstname$ $lastname$"/>
-        <meta charset="UTF-8"> 
+        <meta charset="UTF-8">
         $for(author-meta)$
         <meta name="author" content="$author-meta$">
         $endfor$
@@ -43,33 +43,39 @@
 			        <ul>
                         <li>✉ <a href="mailto:$email$">$email$</a></li>
                         <li>☎ $phone$</li>
+                        $if(homepage)$
                         <li>🌎 <a href="http://$homepage$">$homepage$</a></li>
+                        $endif$
+                        $if(linkedin)$
                         <li>Linkedin: <a href="https://www.linkedin.com/in/$linkedin$">$linkedin$</a></li>
+                        $endif$
+                        $if(github)$
                         <li>GitHub: <a href="https://github.com/$github$">$github$</a></li>
+                        $endif$
 			        </ul>
-		        </div>		
+		        </div>
 		        <div class="clear"></div>
 	        </div>
-	
+
 	        <div id="mainArea" class="quickFade delayFive">
 		        <section>
 			        <article>
 				        <div class="sectionTitle">
 					        <h1>Summary</h1>
 				        </div>
-				
+
 				        <div class="sectionContent">
 					        <p>$summary$</p>
 				        </div>
 			        </article>
 			        <div class="clear"></div>
 		        </section>
-		
-		
+
+
 		        <section>
 			        <div class="sectionTitle">
 				        <h1>Experience</h1>
-			        </div> 
+			        </div>
 			        <div class="sectionContent">
                         $for(experience)$
 				        <article>
@@ -86,32 +92,68 @@
 
 		        <section>
 			        <div class="sectionTitle">
-				        <h1>Certifications</h1>
-			        </div> 
+				        <h1>Education</h1>
+			        </div>
+			        <div class="sectionContent">
+                        $for(education)$
+				        <article>
+					        <h2>$education.degree$ at $education.institution$</h2>
+					        <p class="subDetails">$education.dates$</p>
+                            $for(education.description)$
+                            <p>$education.description$</p>
+                            $endfor$
+				        </article>
+                        $endfor$
+					</div>
+			        <div class="clear"></div>
+		        </section>
+
+                $if(skills)$
+		        <section>
+			        <div class="sectionTitle">
+				        <h1>Skills</h1>
+			        </div>
 			        <div class="sectionContent">
                         <article>
                             <ul>
-                                $for(certifications)$
-                                <li>$certifications.description$</li>
+                                $for(skills)$
+                                <li>$skills.name$: $skills.description$</li>
                                 $endfor$
                             </ul>
                         </article>
 			        </div>
 			        <div class="clear"></div>
 		        </section>
+                $endif$
 
+                $if(interests)$
 		        <section>
 			        <div class="sectionTitle">
 				        <h1>Interests</h1>
-			        </div>			
+                    </div>
 			        <div class="sectionContent">
 				        <article>
-					        <p>$interests$.</p>
+					        <p>$interests$</p>
 				        </article>
 					</div>
 			        <div class="clear"></div>
 		        </section>
-		
+                $endif$
+
+                $if(references)$
+		        <section>
+			        <div class="sectionTitle">
+				        <h1>References</h1>
+                    </div>
+			        <div class="sectionContent">
+				        <article>
+					        <p>$references$</p>
+				        </article>
+					</div>
+			        <div class="clear"></div>
+		        </section>
+                $endif$
+
 	        </div>
         </div>
 

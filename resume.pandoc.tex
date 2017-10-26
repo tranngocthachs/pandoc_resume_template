@@ -12,76 +12,44 @@
 % moderncv themes
 % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
 % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
-\moderncvstyle{banking}                            
-\moderncvcolor{purple}
+\moderncvstyle{banking}
+\moderncvcolor{black}
 
- $if(linestretch)$
- \usepackage{setspace}
- \setstretch{$linestretch$}
- $endif$
- $if(mainfont)$
- \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
- $else$
-  \setmainfont{Liberation Serif}[]
- $endif$
- $if(sansfont)$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+
+$if(sansfont)$
      \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
- $endif$
- $if(monofont)$
+$endif$
+
+$if(monofont)$
      \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$ ,$endfor$$endif$]{$monofont$}
- $endif$
+$endif$
+
 $if(mathfont)$
      \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
- $endif$
- % use microtype if available
- \IfFileExists{microtype.sty}{%
- \usepackage{microtype}
- \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
- }{}
- $if(geometry)$
- \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
- $endif$
+$endif$
 
- $if(links-as-notes)$
- % Make links footnotes instead of hotlinks:
- \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
- $endif$
+$if(geometry)$
+    \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
 
- $for(header-includes)$
- $header-includes$
- $endfor$
+$if(links-as-notes)$
+    % Make links footnotes instead of hotlinks:
+    \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 % adjust the page margins
 \usepackage[scale=0.75]{geometry}
-% if you want to change the width of the column with the dates
-\setlength{\hintscolumnwidth}{3cm}
-% for the 'classic' style, if you want to force the width allocated to your
-% name and avoid line breaks. be careful though, the length is normally
-% calculated to avoid any overlap with your personal info;
-% use this at your own typographical risks...
-%\setlength{\makecvtitlenamewidth}{10cm}          
-
-
-%% Redefine cventry and cvitem to allow multiple paragraphs.
 \usepackage{enumitem}
 
-\renewcommand{\cventry}[7][.25em]{%
-  \cvitem[#1]{#2}{%
-    {\bfseries#3}%
-    \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
-    \ifthenelse{\equal{#5}{}}{}{, #5}%
-    \ifthenelse{\equal{#6}{}}{}{, #6}%
-    .\strut%
-    \newline{\small\strut #7 \par}}}
-
-\renewcommand{\cvitem}[3][.25em]{%
-  \begin{mycvlist}
-    \item[#2] #3
-    \end{mycvlist}
-    \addvspace{#1}}
-
-\newlist{mycvlist}{description}{1}
-\setlist[mycvlist]{labelwidth=\hintscolumnwidth,labelsep=\separatorcolumnwidth,leftmargin=!,align=right,font=\normalfont}
+% adjust itemize
+\setlist[itemize]{label={--}, leftmargin=1cm, topsep=.1cm, itemsep=0pt, parsep=0pt}
 
 %% ========================================================================
 %% personal data
@@ -89,23 +57,38 @@ $if(mathfont)$
 \name{$firstname$}{$lastname$}
 
 $if(title)$
-\title{$title$}
+    \title{$title$}
 $endif$
 
-% optional, remove / comment the line if not wanted; 
+% optional, remove / comment the line if not wanted;
 % the "postcode city" and "country" arguments can be omitted or provided empty
 $if(address)$
-\address{$if(address.street)$$address.street$$endif$}{$address.city$}{$address.country$}
+    \address{$if(address.street)$$address.street$$endif$}{$address.city$}{$address.country$}
 $endif$
 
 % these are optional and can be commented out
-\phone[mobile]{$phone$} 
-\email{$email$}                   
-\homepage{$homepage$} 
-\social[linkedin]{$linkedin$}
-\social[twitter]{$twitter$} 
-\social[github]{$github$}   
-%\extrainfo{additional information}
+\phone[mobile]{$phone$}
+\email{$email$}
+
+$if(homepage)$
+    \homepage{$homepage$}
+$endif$
+
+$if(linkedin)$
+    \social[linkedin]{$linkedin$}
+$endif$
+
+$if(twitter)$
+    \social[twitter]{$twitter$}
+$endif$
+
+$if(github)$
+    \social[github]{$github$}
+$endif$
+
+$if(summary)$
+    \quote{$summary$}
+$endif$
 
 
 %%----------------------------------------------------------------------------------
@@ -118,23 +101,48 @@ $for(include-before)$
 $include-before$
 $endfor$
 
-$if(summary)$
-\section{Summary}
-$summary$
-$endif$
-
 \section{Experience}
- $for(experience)$
- \cventry{$experience.dates$}{$experience.title$}{$experience.employer$}{$experience.city$}{}{$for(experience.description)$$experience.description$$sep$ \medskip{}\newline{}$endfor$}
- $endfor$
-
- \section{Certifications}
- $for(certifications)$
-\cvitem{$certifications.cert$}{$certifications.description$}
+$for(experience)$
+    \cventry{$experience.dates$}{$experience.title$}{$experience.employer$}{$experience.city$}{}{
+        $if(experience.description)$
+            \begin{itemize}
+            $for(experience.description)$
+                \item $experience.description$
+            $endfor$
+            \end{itemize}
+        $endif$
+    }
 $endfor$
 
+\section{Education}
+$for(education)$
+    \cventry{$education.dates$}{$education.degree$}{$education.institution$}{$education.city$}{}{
+        $if(education.description)$
+            \begin{itemize}
+            $for(education.description)$
+                \item $education.description$
+            $endfor$
+            \end{itemize}
+        $endif$
+    }
+$endfor$
+
+$if(skills)$
+\section{Skills}
+$for(skills)$
+    \cvitem{$skills.name$}{$skills.description$}
+$endfor$
+$endif$
+
+$if(interests)$
 \section{Interests}
 $interests$
+$endif$
+
+$if(references)$
+\section{References}
+$references$
+$endif$
 
 \end{document}
 

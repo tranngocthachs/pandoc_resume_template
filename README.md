@@ -47,7 +47,6 @@ email and web forms.
 
 Usage
 -----
-    git clone https://github.com/samjuvonen/pandoc_resume_template.git
     cp example.yml resume.yml
     $EDITOR resume.yml
     make

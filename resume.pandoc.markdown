@@ -12,41 +12,64 @@ $firstname$ $lastname$
 
 
 SUMMARY
------------
+-------
 
 $summary$
 
 
 EXPERIENCE
------------
+----------
 
 $for(experience)$
 
 **$experience.title$**
 $experience.employer$$if(experience.city)$ ($experience.city$)$endif$ *$experience.dates$*
 
-$for(experience.description)$$experience.description$$sep$
-
+$for(experience.description)$
+- $experience.description$
 $endfor$
-
-$endfor$
-
-CERTIFICATIONS
------------
-
-$for(certifications)$
-- $certifications.cert$: $certifications.description$
 $endfor$
 
 
+EDUCATION
+----------
+
+$for(education)$
+
+**$education.degree$**
+$education.institution$$if(education.city)$ ($education.city$)$endif$ *$education.dates$*
+
+$for(education.description)$
+- $education.description$
+$endfor$
+$endfor$
+
+$if(skills)$
+SKILLS
+------
+
+$for(skills)$
+- $skills.name$: $skills.description$
+$endfor$
+$endif$
+
+$if(interests)$
 INTERESTS
------------
+---------
 
-$if(interests)$$interests$$endif$
+$interests$
+$endif$
+
+$if(references)$
+REFERENCES
+----------
+
+$references$
+$endif$
 
 
 CONTACT INFORMATION
------------
+-------------------
 
 - phone: $phone$
 - email: $email$
